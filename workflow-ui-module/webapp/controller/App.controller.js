@@ -164,7 +164,7 @@ sap.ui.define(
         oContextModel.setProperty("/alternativecmt", true);
         oContextModel.setProperty("/subsidiarycmt", true);
         oContextModel.setProperty("/componentcmt", true);
-        oContextModel.setProperty("/handlingcmt", true);
+        // oContextModel.setProperty("/handlingcmt", true);
       },
 
 
@@ -946,13 +946,14 @@ sap.ui.define(
         const sWorkflowName = oContextModel.workflowName;
         let sDynamicComment = "";
 
-        if (sWorkflowName === 'Plant') {
-          sDynamicComment = "commentHandling"
-        } else if (sWorkflowName === 'Customer') {
+        // if (sWorkflowName === 'Plant') {
+        //   sDynamicComment = "commentHandling"
+        // } else 
+        if (sWorkflowName === 'AlignCost') {
           sDynamicComment = "commentComponent"
         } else if (sWorkflowName === 'Scrap') {
           sDynamicComment = "commentScrap"
-        } else if (sWorkflowName === 'AlternativeUsage') {
+        } else if (sWorkflowName === 'AlternativeUse') {
           sDynamicComment = "commentAlternative"
         } else if (sWorkflowName === 'Subsidiary') {
           sDynamicComment = "commentSubsidiary"
@@ -1466,25 +1467,25 @@ sap.ui.define(
         const oModel = this.getView().getModel('context')
         const sWorkflowName = oModel.getData().workflowName;
         const sCaused = oModel.getData().caused
-        if (sWorkflowName === 'Plant') {
+        // if (sWorkflowName === 'Lapp') {
+        //   MessageBox.information("No old comments")
+        //   return;
+        // }
+        if (sWorkflowName === 'Aligncost') {
           MessageBox.information("No old comments")
           return;
         }
-        if (sWorkflowName === 'Customer') {
-          MessageBox.information("No old comments")
-          return;
-        }
-        if (sCaused === 'PlantCaused') {
+        if (sCaused === 'Lapp') {
           oModel.setProperty("/componentcmt", false);
         }
-        if (sWorkflowName === 'HandlingCaused' && sCaused === 'CustomerCaused') {
-          oModel.setProperty("/alternativecmt", false);
-          oModel.setProperty("/subsidiarycmt", false);
-          oModel.setProperty("/scrapcmt", false);
-          oModel.setProperty("/handlingcmt", false);
+        // if (sWorkflowName === 'HandlingCaused' && sCaused === 'CustomerCaused') {
+        //   oModel.setProperty("/alternativecmt", false);
+        //   oModel.setProperty("/subsidiarycmt", false);
+        //   oModel.setProperty("/scrapcmt", false);
+        //   oModel.setProperty("/handlingcmt", false);
 
-        }
-        if (sWorkflowName === 'AlternativeUsage') {
+        // }
+        if (sWorkflowName === 'AlternativeUse') {
           oModel.setProperty("/alternativecmt", false);
           oModel.setProperty("/subsidiarycmt", false);
           oModel.setProperty("/scrapcmt", false);
