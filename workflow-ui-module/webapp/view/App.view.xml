@@ -33,17 +33,26 @@
                             <f:layout>
                                 <f:ResponsiveGridLayout
                                     singleContainerFullSize="false"
+                                    
                                 />
                             </f:layout>
                             <f:formContainers>
                                 <f:FormContainer>
                                     <f:formElements>
                                         <f:FormElement
-                                            label="{i18n>labelCompanyCode}"
-                                        >
+                                            label="{i18n>labelCompanyCode}">
                                             <f:fields>
                                                 <Text
                                                     text="{context>/companyCode}"
+                                                />
+                                            </f:fields>
+                                        </f:FormElement>
+                                        <f:FormElement
+                                            label="{i18n>labelWorkFlowId}"
+                                        >
+                                            <f:fields>
+                                                <Text
+                                                    text="{context>/workflowId}"
                                                 />
                                             </f:fields>
                                         </f:FormElement>
@@ -88,7 +97,7 @@
                                     icon="sap-icon://excel-attachment"
                                     tooltip="{i18n>tooltipExportExcel}"
                                     press="onExportObsoleteItems"
-                                    visible="false"
+                                    visible="true"
                                 />
                                 <Button
                                     text="{i18n>btnDelete}"
@@ -234,7 +243,10 @@
                                 </table:template>
                             </table:Column>
 
-                            <table:Column width="5rem">
+                            <table:Column width="5rem"
+                                        sortProperty="currency"
+                                        filterProperty="currency"    
+                            >
                                 <Label text="{i18n>colCurrency}" />
                                 <table:template>
                                     <Text text="{context>currency}" />

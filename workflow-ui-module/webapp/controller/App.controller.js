@@ -1050,7 +1050,10 @@ sap.ui.define(
           return;
         }
 
-        var aColumns = this._createExportColumns();
+        var oContextModel = this.getOwnerComponent().getModel("context");
+        var oFlags = oContextModel.getData();
+
+        var aColumns = this._createExportColumns(oFlags);
 
         var oSettings = {
           workbook: {
@@ -1066,28 +1069,101 @@ sap.ui.define(
             oSpreadsheet.destroy();
           });
       },
-      _createExportColumns: function () {
-        return [
-          { label: "RFQ ID", property: "rfqId", type: "string" },
-          { label: "Plant", property: "plant", type: "string" },
-          { label: "Component", property: "component", type: "string" },
-          { label: "Description", property: "description", type: "string" },
-          { label: "Manufacture Part", property: "manufacturePart", type: "string" },
+      _createExportColumns: function (oFlags) {
 
-          { label: "Available Stock", property: "availableStock", type: "number" },
-          { label: "Available Cu", property: "availableCu", type: "number" },
-          { label: "Last Consumption", property: "lastConsumption", type: "string" },
-          { label: "Coverage", property: "coverage", type: "number" },
-          { label: "PN", property: "pn", type: "string" },
+        oFlags = oFlags || {};
 
-          { label: "Customer", property: "customer", type: "string" },
-          { label: "End Customer", property: "endCustomer", type: "string" },
-          { label: "Reason", property: "reason", type: "string" },
-          { label: "Caused", property: "caused", type: "string" },
+        var aColumns = [
+          { label: "RFQ ID", property: "rfqId", type: "String" },
+          { label: "Plant", property: "plant", type: "String" },
+          { label: "Component", property: "component", type: "String" },
+          { label: "Description", property: "description", type: "String" },
+          { label: "Manufacture Part", property: "manufacturerPart", type: "String" },
 
-          { label: "Handling", property: "handling", type: "string" },
-          { label: "Comments", property: "comments", type: "string" }
+          { label: "Available Stock", property: "availableStock", type: "Number" },
+          { label: "Free stock full copper", property: "freeStockfullcopper", type: "Number" },
+          { label: "Currency", property: "currency", type: "String" },
+          { label: "Last Consumption", property: "lastConsumption", type: "Date", format: "dd.mm.yyyy" },
+          { label: "Range Coverage", property: "rangeCoverage", type: "Number" },
+          { label: "PN", property: "pn", type: "String" },
+
+          { label: "Customer", property: "customer", type: "String" },
+          { label: "End Customer", property: "endCustomer", type: "String" },
+          { label: "Reason", property: "reason", type: "String" },
+          { label: "Caused", property: "caused", type: "String" },
+
+          { label: "Weight", property: "weight", type: "Number" }
         ];
+
+        // return [
+        //   { label: "RFQ ID", property: "rfqId", type: "String" },
+        //   { label: "Plant", property: "plant", type: "String" },
+        //   { label: "Component", property: "component", type: "String" },
+        //   { label: "Description", property: "description", type: "String" },
+        //   { label: "Manufacture Part", property: "manufacturerPart", type: "String" },
+
+        //   { label: "Available Stock", property: "availableStock", type: "Number" },
+        //   { label: "Free stock full copper", property: "freeStockfullcopper", type: "Number" },
+        //   { label: "Currency", property: "currency", type: "String" },
+        //   { label: "Last Consumption", property: "lastConsumption", type: "Date", format: "dd.mm.yyyy" },
+        //   { label: "Range Coverage", property: "rangeCoverage", type: "Number" },
+        //   { label: "PN", property: "pn", type: "String" },
+
+        //   { label: "Customer", property: "customer", type: "String" },
+        //   { label: "End Customer", property: "endCustomer", type: "String" },
+        //   { label: "Reason", property: "reason", type: "String" },
+        //   { label: "Caused", property: "caused", type: "String" },
+
+        //   { label: "Weight", property: "weight", type: "Number" },
+        //   { label: "Decision Flow", property: "decisionFlow", type: "String" },
+        //   { label: "Goods Receipt", property: "goodsReceipt", type: "Date", format: "dd.mm.yyyy" },
+          
+        //   { label: "Handling", property: "handling", type: "String" },
+        //   { label: "Comments", property: "comments", type: "String" }
+        // ];
+
+        // Decision Flow 
+        if(oFlags.decisionFlowVisible) {
+          aColumns.push({ label: "Decision Flow", property: "decisionFlow", type: "String" });
+        }
+
+        // Goods Recieipt 
+        aColumns.push({ label: "Goods Reciept", property: "goodsReceipt", type: "Date", format: "dd.mm.yyyy" });
+
+        // Customer Response 
+        if(oFlags.componentVisible){
+          aColumns.push({ label: "Customer Response", property: "customerResponse", type: "String" });
+          aColumns.push({ label: "Comments", property: "commentComponent", type: "String" });
+        }
+
+        // Alternative Visible 
+        if(oFlags.alternativeVisible){
+          aColumns.push({ label: "Internal Use", property: "internalUse", type: "Boolean" });
+          aColumns.push({ label: "Comments", property: "commentAlternative", type: "String" });
+        }
+
+        // Sell to Subsidiary 
+        if(oFlags.subsidiaryVisible){
+          aColumns.push({ label: "Sell to Subsidiary", property: "sellToSubsidiary", type: "Boolean" });
+          aColumns.push({ label: "Comments", property: "commentSubsidiary", type: "String" });
+        }
+
+        // Scrapping
+        if(oFlags.scrapVisible) {
+          aColumns.push({ label: "Scrapping", property: "scrapDecision", type: "String" });
+        }
+
+        // Scrap Comment 
+        if(oFlags.scrapRequired) {
+          aColumns.push({ label: "Comments", property: "commentScrap", type: "String"});
+        }
+
+        // Handling 
+        if(oFlags.handlingRequired) {
+          aColumns.push({ label: "Comments", property: "commentHandling", type: "String" });
+        }
+
+        return aColumns;
       },
 
       // onSave: async function () {
