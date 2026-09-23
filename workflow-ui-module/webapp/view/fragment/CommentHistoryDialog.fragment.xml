@@ -47,7 +47,7 @@
                     />
                 </Column>
 
-                <Column
+                <!-- <Column
                     width="20rem"
                     hAlign="Left"
                      visible="{context>/handlingcmt}"
@@ -56,7 +56,7 @@
                         text="Handling"
                         class="sapUiSmallMarginBottom"
                     />
-                </Column>
+                </Column> -->
 
                 <Column
                     width="20rem"
@@ -131,7 +131,7 @@
                         </VBox>
 
                         <!-- Handling -->
-                        <VBox
+                        <!-- <VBox
                             class="sapUiSmallMargin"
                             renderType="Bare"
                         >
@@ -147,7 +147,7 @@
                                 editable="false"
                                 class="sapUiTinyMarginTop"
                             />
-                        </VBox>
+                        </VBox> -->
 
                         <!-- Scrap -->
                         <VBox
