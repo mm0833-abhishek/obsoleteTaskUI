@@ -232,7 +232,7 @@ sap.ui.define(
           "description",
           "manufacturerPart",
           "availableStock",
-          "availableCu",
+          "freeStockfullcopper",
           "rangeCoverage",
           "pn",
           "customer",
@@ -241,7 +241,8 @@ sap.ui.define(
           "caused",
           "totalAmount",
           "weight",
-          "decisionFlow"
+          "decisionFlow",
+          "currency"
         ];
 
         const aFilters = aSearchFields.map(function (sField) {
@@ -1547,7 +1548,7 @@ sap.ui.define(
         //   MessageBox.information("No old comments")
         //   return;
         // }
-        if (sWorkflowName === 'Aligncost') {
+        if (sWorkflowName === 'AlignCost') {
           MessageBox.information("No old comments")
           return;
         }

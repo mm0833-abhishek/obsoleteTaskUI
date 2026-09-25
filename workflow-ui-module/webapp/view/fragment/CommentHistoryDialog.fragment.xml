@@ -47,6 +47,18 @@
                     />
                 </Column>
 
+                
+                <Column
+                    width="20rem"
+                    hAlign="Left"
+                    visible="{context>/componentcmt}"
+                >
+                    <Text
+                        text="Customer Response"
+                        class="sapUiSmallMarginBottom"
+                    />
+                </Column>
+
                 <!-- <Column
                     width="20rem"
                     hAlign="Left"
@@ -91,16 +103,6 @@
                     />
                 </Column>
 
-                <Column
-                    width="20rem"
-                    hAlign="Left"
-                    visible="{context>/componentcmt}"
-                >
-                    <Text
-                        text="Customer Response"
-                        class="sapUiSmallMarginBottom"
-                    />
-                </Column>
             </columns>
 
             <items>
@@ -127,6 +129,25 @@
                             <Text
                                 text="{comments>component}"
                                 class="sapUiMediumMarginTop"
+                            />
+                        </VBox>
+
+                        <!-- Customer -->
+                        <VBox
+                            class="sapUiSmallMargin"
+                            renderType="Bare"
+                        >
+                            <ObjectStatus
+                                class="sapUiTinyMarginBottom"
+                                text="Customer Response: {comments>customerResponse}"
+                                state="Information"
+                            />
+                            <TextArea
+                                value="{comments>commentComponent}"
+                                rows="4"
+                                width="100%"
+                                editable="false"
+                                class="sapUiTinyMarginTop"
                             />
                         </VBox>
 
@@ -206,24 +227,7 @@
                             />
                         </VBox>
 
-                        <!-- Customer -->
-                        <VBox
-                            class="sapUiSmallMargin"
-                            renderType="Bare"
-                        >
-                            <ObjectStatus
-                                class="sapUiTinyMarginBottom"
-                                text="Customer Response: {comments>customerResponse}"
-                                state="Information"
-                            />
-                            <TextArea
-                                value="{comments>commentComponent}"
-                                rows="4"
-                                width="100%"
-                                editable="false"
-                                class="sapUiTinyMarginTop"
-                            />
-                        </VBox>
+
                     </cells>
                 </ColumnListItem>
             </items>
